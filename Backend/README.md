@@ -111,3 +111,11 @@ Authorization: Bearer jwt_token_here
     "message": "User logged out successfully"
 }
 
+
+
+
+
+
+
+
+

@@ -3,7 +3,10 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 module.exports.authUSer = async (req, res, next) => {
-    // if there is any error occurs during logout i have add ? after authorization? like this 
+   
+   
+    // if there is any error occurs during logout i have add ? after authorization? like this
+    
     const token = req.cookies.token || req.headers.authorization.split(" ")[1];
 
     if (!token) {
