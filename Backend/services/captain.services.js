@@ -5,13 +5,13 @@ module.exports.createCaptain = async ({ fullname, email, password, vehicle }) =>
   if (!fullname || !fullname.firstname || !fullname.lastname) {
     throw new Error("Missing required fields: firstname, lastname");
   }
-  
+
   const { firstname, lastname } = fullname;
   const { color, plate, capacity, vehicleType } = vehicle;
 
-  console.log("Data passed to createCaptain:", {
-    fullname, email, password, vehicle
-  });
+  // console.log("Data passed to createCaptain:", {
+  //   fullname, email, password, vehicle
+  // });
 
   // Check for missing fields
   if (!email || !password || !color || !plate || !capacity || !vehicleType) {

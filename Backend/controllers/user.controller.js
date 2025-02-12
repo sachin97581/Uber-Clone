@@ -107,11 +107,37 @@ module.exports.getUserProfile = async (req, res, next) => {
 }
 
 
+// module.exports.logoutUser = async (req, res, next) => {
+//     res.clearCookie("token");
+//     const token = req.cookies.token || req.headers.authorization.split(" ")[1];
+
+//     await blasckListTokenModel.create({ token });
+
+//     res.status(200).json({ message: "User logged out successfully" });
+// }
+
+// i make change here also 
+
 module.exports.logoutUser = async (req, res, next) => {
-    res.clearCookie("token");
-    const token = req.cookies.token || req.headers.authorization.split(" ")[1];
+    try {
+        // Extract the token from cookies or authorization header
+        const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
 
-    await blasckListTokenModel.create({ token });
+        if (!token) {
+            return res.status(400).json({ message: "No token provided for logout" });
+        }
 
-    res.status(200).json({ message: "User logged out successfully" });
-}
+        // Blacklist the token
+        await blacklistTokenModel.create({ token });
+
+        // Clear the token cookie
+        res.clearCookie("token");
+
+        // Respond with success
+        res.status(200).json({ message: "User logged out successfully" });
+    } catch (error) {
+        console.error("Logout Error:", error.message);
+        res.status(500).json({ message: "Internal server error during logout" });
+    }
+};
+
